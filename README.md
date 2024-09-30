@@ -2,6 +2,10 @@
 
 [![CI](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml)
 
+# The result is shown below
+
+<img width="474" alt="result" src="https://github.com/user-attachments/assets/e365bbc6-0db5-4e9e-8a6f-7fc8a4f704f2">
+
 # Continuous Integration Setup
 
 This repository uses **GitHub Actions** for Continuous Integration (CI) to ensure that the code is automatically tested, formatted, and linted when changes are pushed or pull requests are created.
