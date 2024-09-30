@@ -1,5 +1,5 @@
 # Hongyi-Duan-Mini-Project-1
 
-[![CI/CD run](https://github.com/nogibjj/Hongyi-Duan-Mini-Project-1/actions/workflows/hello.yml/badge.svg)](https://github.com/nogibjj/Hongyi-Duan-Mini-Project-1/actions/workflows/hello.yml)
+[![CI](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml)
 
 This is a course assignment of data engineering, which is about virtual environment and pipelines.
