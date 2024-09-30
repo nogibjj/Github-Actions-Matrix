@@ -1,88 +1,104 @@
-# Hongyi-Duan-Mini-Project-1
+# Hongyi-Duan-Github-Actions-Matrix
 
 [![CI](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/Github-Actions-Matrix/actions/workflows/ci.yml)
 
-Continuous Integration Setup
-This repository uses GitHub Actions for Continuous Integration (CI) to ensure the code is automatically tested, formatted, and linted upon certain events, such as pushing changes to the main branch or creating a pull request.
+# Continuous Integration Setup
 
-Workflow Overview
-The CI workflow is defined in the ci.yml file located in the .github/workflows/ directory. This workflow performs the following actions:
+This repository uses **GitHub Actions** for Continuous Integration (CI) to ensure that the code is automatically tested, formatted, and linted when changes are pushed or pull requests are created.
 
-Events Triggering the Workflow
+## Workflow Overview
+
+The CI workflow is defined in the `.github/workflows/ci.yml` file. The following details explain how the CI works:
+
+### Events Triggering the Workflow
+
 The workflow is triggered by the following events:
+- **Push**: When changes are pushed to the `main` branch.
+- **Pull Request**: When a pull request is created for the `main` branch.
+- **Manual Dispatch**: The workflow can be manually triggered using **workflow_dispatch**.
 
-Push: When changes are pushed to the main branch.
-Pull Requests: When a pull request is created for the main branch.
-Manual Dispatch: The workflow can also be triggered manually using the workflow_dispatch event.
-Supported Python Versions
-The workflow is configured to run on the following versions of Python:
+### Supported Python Versions
 
-PyPy3.9
-PyPy3.10
-Python 3.9
-Python 3.10
-Python 3.11
-Python 3.12
-Build Job
-Each time the workflow is triggered, it runs a build job that executes the following steps:
+The workflow runs the build and tests on the following Python versions:
+- PyPy3.9
+- PyPy3.10
+- Python 3.9
+- Python 3.10
+- Python 3.11
+- Python 3.12
 
-Checkout the Repository: The action checks out the code from the repository:
+### Build Job
 
-yaml
-复制代码
-- uses: actions/checkout@v4
-Set Up Python: The specific Python version is set up for each job using the setup-python action:
+Each time the workflow is triggered, it runs a **build** job. The steps in the build job are as follows:
 
-yaml
-复制代码
-- name: Set up Python ${{ matrix.python-version }}
-  uses: actions/setup-python@v5
-  with:
-    python-version: ${{ matrix.python-version }}
-Install Packages: All necessary dependencies are installed using the make install command. This assumes that a Makefile exists with an install target defined.
+1. **Checkout the Repository**  
+   This action checks out the code from the repository:
+   ```yaml
+   - uses: actions/checkout@v4
+   ```
 
-yaml
-复制代码
-- name: install packages
-  run: make install
-Run Tests: The code is tested using the make test command. It is expected that the repository has a test target in the Makefile that runs the relevant test suite.
+2. **Set Up Python**  
+   Python is set up for the specific versions listed in the matrix:
+   ```yaml
+   - name: Set up Python ${{ matrix.python-version }}
+     uses: actions/setup-python@v5
+     with:
+       python-version: ${{ matrix.python-version }}
+   ```
 
-yaml
-复制代码
-- name: test
-  run: make test
-Code Formatting: The code is formatted according to predefined formatting rules using the make format command.
+3. **Install Dependencies**  
+   The necessary dependencies are installed using the `make install` command:
+   ```yaml
+   - name: Install packages
+     run: make install
+   ```
 
-yaml
-复制代码
-- name: format
-  run: make format
-Linting: The code is checked for style and potential errors using a linter, invoked by the make lint command.
+4. **Run Tests**  
+   The test suite is run using the `make test` command:
+   ```yaml
+   - name: Run tests
+     run: make test
+   ```
 
-yaml
-复制代码
-- name: lint
-  run: make lint
-Running the CI Locally
-To ensure consistency with the CI setup, you can run the following make commands locally:
+5. **Code Formatting**  
+   The code is automatically formatted using the `make format` command:
+   ```yaml
+   - name: Format code
+     run: make format
+   ```
 
-Install dependencies:
+6. **Linting**  
+   The code is linted using the `make lint` command:
+   ```yaml
+   - name: Lint code
+     run: make lint
+   ```
 
-bash
-复制代码
-make install
-Run tests:
+## Running the CI Locally
 
-bash
-复制代码
-make test
-Format the code:
+To ensure consistency with the CI setup, you can run the following commands locally using `make`:
 
-bash
-复制代码
-make format
-Lint the code:
+1. **Install dependencies**:
+   ```bash
+   make install
+   ```
 
-bash
-复制代码
-make lint
+2. **Run tests**:
+   ```bash
+   make test
+   ```
+
+3. **Format the code**:
+   ```bash
+   make format
+   ```
+
+4. **Lint the code**:
+   ```bash
+   make lint
+   ```
+
+## Additional Notes
+
+- The `Makefile` is expected to contain `install`, `test`, `format`, and `lint` targets. These targets should handle dependency installation, running tests, formatting code, and running linting checks respectively.
+- The CI is designed to run on `ubuntu-latest` as the host environment.
